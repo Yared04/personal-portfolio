@@ -1,0 +1,102 @@
+{
+  "backend": [
+    {
+      "name": "Node.js",
+      "icon": "/icons/Node.js.svg"
+    },
+    {
+      "name": "Django",
+      "icon": "/icons/Django.svg"
+    },
+    {
+      "name": "Express.js",
+      "icon": "/icons/Express.svg"
+    },
+    {
+      "name": "Flask",
+      "icon": "/icons/flask.svg"
+    },
+    {
+      "name": "NestJS",
+      "icon": "/icons/Nest.js.svg"
+    },
+    {
+      "name": "FastAPI",
+      "icon": "/icons/FastAPI.svg"
+    },
+    {
+      "name": "MongoDB",
+      "icon": "/icons/mongodb.svg"
+    },
+    {
+      "name": "PostgreSQL",
+      "icon": "/icons/postgresql.svg"
+    },
+    {
+      "name": "Supabase",
+      "icon": "/icons/supabase.svg"
+    }
+  ],
+  "frontend": [
+    {
+      "name": "React",
+      "icon": "/icons/React.svg"
+    },
+    {
+      "name": "Next.js",
+      "icon": "/icons/Next.js.svg"
+    },
+    {
+      "name": "Vue.js",
+      "icon": "/icons/Vue.js.svg"
+    },
+    {
+      "name": "Nuxt JS",
+      "icon": "/icons/Nuxt JS.svg"
+    },
+    {
+      "name": "Electron",
+      "icon": "/icons/Electron.svg"
+    },
+    {
+      "name": "Tailwind CSS",
+      "icon": "/icons/Tailwind CSS.svg"
+    },
+    {
+      "name": "JavaScript",
+      "icon": "/icons/JavaScript.svg"
+    },
+    {
+      "name": "TypeScript",
+      "icon": "/icons/TypeScript.svg"
+    },
+    {
+      "name": "Cypress",
+      "icon": "/icons/Cypress.svg"
+    },
+    {
+      "name": "Jest",
+      "icon": "/icons/Jest.svg"
+    }
+  ],
+  "devops": [
+    {
+      "name": "Git",
+      "icon": "/icons/Git.svg"
+    },
+
+    {
+      "name": "Docker",
+      "icon": "/icons/Docker.svg"
+    },
+
+    {
+      "name": "CI/CD",
+      "icon": "/icons/CI-CD.svg"
+    },
+    {
+      "name": "Google Cloud",
+      "icon": "/icons/Google Cloud.svg"
+    }
+  ]
+}

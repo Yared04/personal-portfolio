@@ -1,0 +1,56 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "Personal Portfolio",
+      "description": "A modern, responsive portfolio website built with Next.js, TypeScript, and Tailwind CSS. Features dark mode, smooth animations, and a clean design.",
+      "images": [
+        "/projects/portfolio-1.png",
+        "/projects/portfolio-2.png",
+        "/projects/portfolio-3.png"
+      ],
+      "technologies": ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+      "github": "https://github.com/yourusername/portfolio",
+      "live": "https://yourportfolio.com",
+      "featured": true
+    },
+    {
+      "id": 2,
+      "title": "E-Commerce Platform",
+      "description": "A full-stack e-commerce platform with user authentication, product management, shopping cart, and payment integration.",
+      "images": ["/projects/ecommerce-1.png", "/projects/ecommerce-2.png"],
+      "technologies": ["React", "Node.js", "MongoDB", "Stripe"],
+      "github": "https://github.com/yourusername/ecommerce",
+      "live": "",
+      "featured": true
+    },
+    {
+      "id": 3,
+      "title": "Task Management App",
+      "description": "A collaborative task management application with real-time updates, team features, and progress tracking.",
+      "images": [
+        "/projects/taskmanager-1.png",
+        "/projects/taskmanager-2.png",
+        "/projects/taskmanager-3.png"
+      ],
+      "technologies": ["React", "Firebase", "Material-UI", "Redux"],
+      "github": "",
+      "live": "https://yourtaskmanager.com",
+      "featured": true
+    },
+    {
+      "id": 3,
+      "title": "Task Management App",
+      "description": "A collaborative task management application with real-time updates, team features, and progress tracking.",
+      "images": [
+        "/projects/taskmanager-1.png",
+        "/projects/taskmanager-2.png",
+        "/projects/taskmanager-3.png"
+      ],
+      "technologies": ["React", "Firebase", "Material-UI", "Redux"],
+      "github": "",
+      "live": "https://yourtaskmanager.com",
+      "featured": true
+    }
+  ]
+}

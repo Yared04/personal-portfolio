@@ -1,0 +1,67 @@
+{
+  "education": [
+    {
+      "title": "Software Engineering",
+      "institution": "Addis Ababa University",
+      "location": "Addis Ababa, Ethiopia",
+      "date": "Sep 2019 – Jul 2024",
+      "description": [
+        "CGPA: 3.68/4. Relevant Courses: Data Structures and Algorithms, Cloud Computing, Web and Mobile Design and Development, Computer Architecture, Object-Oriented Programming."
+      ]
+    },
+    {
+      "title": "Research Intern",
+      "institution": "University of Michigan",
+      "date": "May 2023 – Aug 2023",
+      "location": "Ann Arbor, USA",
+      "description": [
+        "Developed a carbon-aware scheduling platform to calculate environmental impact of workloads running on servers.",
+        "Reviewed 5+ research papers and adapted algorithms for carbon emission calculations, enhancing precision and reliability.",
+        "Collaborated with 3 researchers, aligning technical implementations with research objectives for a data-driven approach."
+      ]
+    },
+    {
+      "title": "Coding Academy",
+      "institution": "Africa to Silicon Valley (A2SV)",
+      "date": "Dec 2021 – Dec 2022",
+      "location": "Addis Ababa, Ethiopia",
+      "description": [
+        "Key Competencies: Data Structures and Algorithms, Real-World Project Development."
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "title": "Full Stack Developer",
+      "company": "Kifiya Financial Technology",
+      "date": "January 2024 – Present",
+      "location": "Addis Ababa, Ethiopia",
+      "description": [
+        "Collaborating as a front-end developer on the Akil platform, connecting over 1300 youth with 30+ organizations.",
+        "Leveraged RTK Query to reduce page load time by 20% and improve user engagement.",
+        "Integrated a chatbot and text completion into the platform using OpenAI's API, enhancing user interaction and support."
+      ]
+    },
+    {
+      "title": "Front End Developer",
+      "company": "Africa to Silicon Valley",
+      "date": "Aug 2024 – January 2025",
+      "location": "Addis Ababa, Ethiopia",
+      "description": [
+        "Collaborating as a front-end developer on the Akil platform, connecting over 1300 youth with 30+ organizations.",
+        "Leveraged RTK Query to reduce page load time by 20% and improve user engagement.",
+        "Integrated a chatbot and text completion into the platform using OpenAI's API, enhancing user interaction and support."
+      ]
+    },
+    {
+      "title": "Full Stack Developer",
+      "company": "Upwork",
+      "date": "Oct 2024 – Present",
+      "description": [
+        "Collaborating as a front-end developer on the Akil platform, connecting over 1300 youth with 30+ organizations.",
+        "Leveraged RTK Query to reduce page load time by 20% and improve user engagement.",
+        "Integrated a chatbot and text completion into the platform using OpenAI's API, enhancing user interaction and support."
+      ]
+    }
+  ]
+}
