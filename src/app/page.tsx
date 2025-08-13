@@ -98,7 +98,7 @@ type SectionProps = {
 function Section({ name, onInViewChange, children, id }: SectionProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { 
-    amount: typeof window !== 'undefined' && window.innerWidth < 800 && name === 'Projects' ? 0.1 : 0.6 
+    amount: typeof window !== 'undefined' && window.innerWidth < 800 && name === 'Projects' ? 0.1 : name === 'Resume' ? 0.2 : 0.6
   });
 
   useEffect(() => {
