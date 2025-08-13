@@ -48,13 +48,13 @@ const Services = () => {
   return (
     <div ref={ref}>
       <Title title="Technical Skills" />
-      <div className="flex w-full flex-nowrap gap-8">
-        <motion.div variants={cardVariants} initial="hidden" animate={isInView ? 'show' : 'hidden'}>
-          <Card className="group min-w-96 transition-all duration-300 hover:scale-105 dark:bg-neutral-700">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+        <motion.div className="flex" variants={cardVariants} initial="hidden" animate={isInView ? 'show' : 'hidden'}>
+          <Card className="group w-full h-full transition-all duration-300 hover:scale-105 dark:bg-neutral-900">
             <CardHeader>
               <div className="flex flex-col gap-3">
                 <Image
-                  className="rounded-lg bg-white p-2 dark:bg-neutral-600"
+                  className="rounded-lg bg-white p-2 dark:bg-neutral-900"
                   src="/icons/backend.png"
                   width={60}
                   height={60}
@@ -71,7 +71,7 @@ const Services = () => {
                 animate={isInView ? 'show' : 'hidden'}
               >
                 {skillsData.backend.map(skill => (
-                  <motion.span key={skill.name} className="p-2" variants={item}>
+                  <motion.span key={`backend-${skill.name}`} className="p-2" variants={item}>
                     <div className="flex items-center gap-2">
                       <Image
                         src={skill.icon}
@@ -89,12 +89,12 @@ const Services = () => {
           </Card>
         </motion.div>
 
-        <motion.div variants={cardVariants} initial="hidden" animate={isInView ? 'show' : 'hidden'}>
-          <Card className="group min-w-96 transition-all duration-300 hover:scale-105 dark:bg-neutral-700">
+        <motion.div className="flex" variants={cardVariants} initial="hidden" animate={isInView ? 'show' : 'hidden'}>
+          <Card className="group w-full h-full transition-all duration-300 hover:scale-105 dark:bg-neutral-900">
             <CardHeader>
               <div className="flex flex-col gap-3">
                 <Image
-                  className="rounded-lg bg-white p-2 dark:bg-neutral-600"
+                  className="rounded-lg bg-white p-2 dark:bg-neutral-900"
                   src="/icons/frontend.png"
                   width={60}
                   height={60}
@@ -111,7 +111,7 @@ const Services = () => {
                 animate={isInView ? 'show' : 'hidden'}
               >
                 {skillsData.frontend.map(skill => (
-                  <motion.span key={skill.name} className="p-2" variants={item}>
+                  <motion.span key={`frontend-${skill.name}`} className="p-2" variants={item}>
                     <div className="flex items-center gap-2">
                       <Image
                         src={skill.icon}
@@ -129,16 +129,16 @@ const Services = () => {
           </Card>
         </motion.div>
 
-        <motion.div variants={cardVariants} initial="hidden" animate={isInView ? 'show' : 'hidden'}>
-          <Card className="group min-w-96 transition-all duration-300 hover:scale-105 dark:bg-neutral-700">
+        <motion.div className="flex" variants={cardVariants} initial="hidden" animate={isInView ? 'show' : 'hidden'}>
+          <Card className="group w-full h-full transition-all duration-300 hover:scale-105 dark:bg-neutral-900">
             <CardHeader>
               <div className="flex flex-col gap-3">
                 <Image
-                  className="rounded-lg bg-white p-2 dark:bg-neutral-600"
-                  src="/icons/frontend.png"
+                  className="rounded-lg bg-white p-2 dark:bg-neutral-900"
+                  src="/icons/devops.svg"
                   width={60}
                   height={60}
-                  alt="frontend"
+                  alt="devops"
                 />
                 <p className="text-xl font-semibold dark:text-white">DevOps</p>
               </div>
@@ -151,7 +151,7 @@ const Services = () => {
                 animate={isInView ? 'show' : 'hidden'}
               >
                 {skillsData.devops.map(skill => (
-                  <motion.span key={skill.name} className="p-2" variants={item}>
+                  <motion.span key={`devops-${skill.name}`} className="p-2" variants={item}>
                     <div className="flex items-center gap-2">
                       <Image
                         src={skill.icon}

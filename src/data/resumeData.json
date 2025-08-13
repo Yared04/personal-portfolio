@@ -6,7 +6,7 @@
       "location": "Addis Ababa, Ethiopia",
       "date": "Sep 2019 – Jul 2024",
       "description": [
-        "CGPA: 3.68/4. Relevant Courses: Data Structures and Algorithms, Cloud Computing, Web and Mobile Design and Development, Computer Architecture, Object-Oriented Programming."
+        "Relevant Courses: Data Structures and Algorithms, Cloud Computing, Web and Mobile Design and Development, Computer Architecture, Object-Oriented Programming."
       ]
     },
     {
@@ -16,8 +16,7 @@
       "location": "Ann Arbor, USA",
       "description": [
         "Developed a carbon-aware scheduling platform to calculate environmental impact of workloads running on servers.",
-        "Reviewed 5+ research papers and adapted algorithms for carbon emission calculations, enhancing precision and reliability.",
-        "Collaborated with 3 researchers, aligning technical implementations with research objectives for a data-driven approach."
+        "Collaborated with researchers, aligning technical implementations with research objectives for a data-driven approach."
       ]
     },
     {
@@ -33,14 +32,55 @@
   "experience": [
     {
       "title": "Full Stack Developer",
+      "company": "Upwork",
+      "date": "Oct 2024 – Present",
+      "projects": [
+        {
+          "title": "Document Generation Platform",
+          "description": [
+            "Built a platform to generate and customize documents in minutes.",
+            "Optimized rendering and export processes, reducing creation time by 30%.",
+            "Built using Vue (Nuxt.js)."
+          ]
+        },
+        {
+          "title": "Cross-Platform Desktop App",
+          "description": [
+            "Developed a desktop application with real-time chat and auto-update features.",
+            "Improved team communication and reduced downtime for feature rollouts by 40%.",
+            "Built using Electron(React) and Supabase."
+          ]
+        },
+        {
+          "title": "Amazon Advertising Management Tool",
+          "description": [
+            "Delivered a platform to manage Amazon ad campaigns, profiles, and performance analytics.",
+            "Automated reporting & visualizations, saving clients 10+ hours/week of manual work.",
+            "Built using React (Next.js)."
+          ]
+        }
+      ],
+      "technologies": [
+        "Vue.js (Nuxt.js)",
+        "Electron",
+        "React (Next.js)",
+        "TypeScript",
+        "Supabase",
+        "GitHub Actions",
+        "Docker"
+      ]
+    },
+    {
+      "title": "Full Stack Developer",
       "company": "Kifiya Financial Technology",
-      "date": "January 2024 – Present",
+      "date": "January 2025 – June 2025",
       "location": "Addis Ababa, Ethiopia",
       "description": [
-        "Collaborating as a front-end developer on the Akil platform, connecting over 1300 youth with 30+ organizations.",
-        "Leveraged RTK Query to reduce page load time by 20% and improve user engagement.",
-        "Integrated a chatbot and text completion into the platform using OpenAI's API, enhancing user interaction and support."
-      ]
+        "Developed and maintained Django REST APIs with complex query handling and logic.",
+        "Built responsive components enhancing user experience and visual consistency.",
+        "Set up a CI/CD pipeline for the platform using GitHub Actions, Docker, and AWS."
+      ],
+      "technologies": ["Django", "PostgreSQL", "React (Next.js)", "TypeScript", "AWS", "GitHub Actions", "Docker"]
     },
     {
       "title": "Front End Developer",
@@ -48,19 +88,20 @@
       "date": "Aug 2024 – January 2025",
       "location": "Addis Ababa, Ethiopia",
       "description": [
-        "Collaborating as a front-end developer on the Akil platform, connecting over 1300 youth with 30+ organizations.",
+        "Collaborated as a front-end developer on the Akil platform, connecting over 1300 youth with 30+ organizations.",
         "Leveraged RTK Query to reduce page load time by 20% and improve user engagement.",
         "Integrated a chatbot and text completion into the platform using OpenAI's API, enhancing user interaction and support."
-      ]
+      ],
+      "technologies": ["React (Next.js)", "TypeScript"]
     },
     {
-      "title": "Full Stack Developer",
-      "company": "Upwork",
-      "date": "Oct 2024 – Present",
+      "title": "Lead Head of Remote Education",
+      "company": "Africa to Silicon Valley",
+      "date": "Dec 2022 – Jul 2024",
+      "location": "Addis Ababa, Ethiopia",
       "description": [
-        "Collaborating as a front-end developer on the Akil platform, connecting over 1300 youth with 30+ organizations.",
-        "Leveraged RTK Query to reduce page load time by 20% and improve user engagement.",
-        "Integrated a chatbot and text completion into the platform using OpenAI's API, enhancing user interaction and support."
+        "Trained over 100 students in diverse data structures and algorithms.",
+        "Managed a team of 23 professionals to ensure effective delivery of remote education services."
       ]
     }
   ]

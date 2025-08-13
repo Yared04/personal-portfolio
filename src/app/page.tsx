@@ -2,6 +2,7 @@
 import Contact from '@/components/Contact';
 import HeroSection from '@/components/HeroSection';
 import Navigation from '@/components/Navigation';
+import ParticlesBackground from '@/components/ParticlesBackground';
 import Projects from '@/components/Projects';
 import Resume from '@/components/Resume';
 import Services from '@/components/Services';
@@ -11,20 +12,57 @@ import { useEffect, useRef, useState } from 'react';
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState<string>('Home');
+  const [showMobileNav, setShowMobileNav] = useState(true);
 
   const handleInViewChange = (name: string) => {
     setActiveSection(name);
   };
 
+  // Show navigation while scrolling, hide 1 second after stopping
+  useEffect(() => {
+    let scrollTimeout: NodeJS.Timeout;
+    
+    const handleScroll = () => {
+      if (window.innerWidth < 640) {
+        // Clear any existing timeout
+        clearTimeout(scrollTimeout);
+        // Show navigation immediately when scrolling
+        setShowMobileNav(true);
+        // Hide navigation 1 second after scrolling stops
+        scrollTimeout = setTimeout(() => {
+          setShowMobileNav(false);
+        }, 1000);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimeout);
+    };
+  }, []);
+  
   return (
     <div className="">
+      {/* Particles Background */}
+      <ParticlesBackground />
+      
       <div className="absolute right-5 top-5 z-10">
         <ThemeToggler />
       </div>
-      <nav className="fixed left-0 flex h-full flex-col justify-center p-4">
+      
+      {/* Desktop Navigation - Fixed left sidebar */}
+      <nav className="fixed left-0 hidden h-full flex-col justify-center p-4 sm:flex">
         <Navigation active={activeSection} />
       </nav>
-      <main className="container ml-24 flex max-w-screen-xl flex-col gap-32 lg:ml-36">
+
+      {/* Mobile Navigation - Overlay on top */}
+      <nav className={`fixed left-0 top-0 z-50 flex h-full w-full flex-col p-4 justify-center transition-opacity duration-300 sm:hidden ${showMobileNav ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        <Navigation active={activeSection} />
+      </nav>
+
+      {/* Main content with responsive margins */}
+      <main className="container flex max-w-screen-xl flex-col gap-32 px-4 sm:ml-24 lg:ml-36">
         <Section id="home" name="Home" onInViewChange={handleInViewChange}>
           <HeroSection />
         </Section>
@@ -54,7 +92,7 @@ type SectionProps = {
 
 function Section({ name, onInViewChange, children, id }: SectionProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { amount: 0.6 });
+  const isInView = useInView(ref, { amount: window.innerWidth < 800 && name === 'Projects' ? 0.1 : 0.6 });
 
   useEffect(() => {
     if (isInView) {
@@ -63,7 +101,7 @@ function Section({ name, onInViewChange, children, id }: SectionProps) {
   }, [isInView, name, onInViewChange]);
 
   return (
-    <section ref={ref} id={id} className="flex min-h-screen w-full items-center justify-center">
+    <section ref={ref} id={id} className="flex w-full items-center justify-center py-10">
       {children}
     </section>
   );

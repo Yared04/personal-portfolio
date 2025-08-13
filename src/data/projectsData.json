@@ -1,55 +1,69 @@
 {
   "projects": [
     {
-      "id": 1,
-      "title": "Personal Portfolio",
-      "description": "A modern, responsive portfolio website built with Next.js, TypeScript, and Tailwind CSS. Features dark mode, smooth animations, and a clean design.",
+      "id": 0,
+      "title": "Akil",
+      "description": "A platform for individuals to find opportunities that match their skills and for organizations to connect with individuals.",
       "images": [
-        "/projects/portfolio-1.png",
-        "/projects/portfolio-2.png",
-        "/projects/portfolio-3.png"
+        { "src": "/akil-1.png", "caption": "" },
+        { "src": "/akil-2.png", "caption": "" },
+        { "src": "/akil-3.png", "caption": "" }
       ],
-      "technologies": ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-      "github": "https://github.com/yourusername/portfolio",
-      "live": "https://yourportfolio.com",
+      "technologies": ["React (Next.js)", "TypeScript", "OpenAI API"],
+      "live": "https://akilconnect.org/en",
       "featured": true
     },
     {
       "id": 2,
-      "title": "E-Commerce Platform",
-      "description": "A full-stack e-commerce platform with user authentication, product management, shopping cart, and payment integration.",
-      "images": ["/projects/ecommerce-1.png", "/projects/ecommerce-2.png"],
-      "technologies": ["React", "Node.js", "MongoDB", "Stripe"],
-      "github": "https://github.com/yourusername/ecommerce",
-      "live": "",
+      "title": "Business Management System",
+      "description": "A comprehensive web application for a company to efficiently manage and track various aspects of its operations, including purchases, sales, inventory levels, customers, transactions, and provisions.",
+      "images": [
+        { "src": "/for-1.png", "caption": "" },
+        { "src": "/for-2.png", "caption": "" },
+        { "src": "/for-3.png", "caption": "" }
+      ],
+      "technologies": ["Express.js", "PostgreSQL", "React (Next.js)", "TypeScript"],
+      "github": "https://github.com/Yared04/F.O.R-Automatisation-backend",
       "featured": true
     },
     {
       "id": 3,
-      "title": "Task Management App",
-      "description": "A collaborative task management application with real-time updates, team features, and progress tracking.",
+      "title": "RateEat",
+      "description": "A revolutionary food item rating application that allows users to provide ratings and reviews for individual food items, rather than the entire restaurants.",
       "images": [
-        "/projects/taskmanager-1.png",
-        "/projects/taskmanager-2.png",
-        "/projects/taskmanager-3.png"
+        { "src": "/rateeat-1.png", "caption": "" },
+        { "src": "/rateeat-2.png", "caption": "" },
+        { "src": "/rateeat-3.png", "caption": "" },
+        { "src": "/rateeat-4.png", "caption": "" }
       ],
-      "technologies": ["React", "Firebase", "Material-UI", "Redux"],
+      "technologies": ["Vue (Nuxt.js)", "TypeScript"],
+      "featured": true
+    },
+    {
+      "id": 4,
+      "title": "Web File Manager",
+      "description": "A web-based file management system that allows users to upload, organize, and share files with intuitive folder navigation and collaborative features.",
+      "images": [
+        { "src": "/web-file-1.png", "caption": "" }
+      ],
+      "technologies": ["React (Next.js)", "TypeScript", "Django", "PostgreSQL"],
       "github": "",
       "live": "https://yourtaskmanager.com",
       "featured": true
     },
     {
-      "id": 3,
-      "title": "Task Management App",
-      "description": "A collaborative task management application with real-time updates, team features, and progress tracking.",
+      "id": 5,
+      "title": "Histori",
+      "description": "An interactive 3D globe application that visualizes world history transformations over time, allowing users to explore political landscapes and historical events through timeline navigation.",
       "images": [
-        "/projects/taskmanager-1.png",
-        "/projects/taskmanager-2.png",
-        "/projects/taskmanager-3.png"
+        { "src": "/histori-1.png", "caption": "" },
+        { "src": "/histori-2.png", "caption": "" },
+        { "src": "/histori-3.png", "caption": "" },
+        { "src": "/histori-4.png", "caption": "" }
       ],
-      "technologies": ["React", "Firebase", "Material-UI", "Redux"],
-      "github": "",
-      "live": "https://yourtaskmanager.com",
+      "technologies": ["React (Next.js)", "TypeScript", "Three.js", "Express.js", "MongoDB", "OpenAI API"],
+      "github": "https://github.com/Yared04/Histori",
+      "live": "https://histori-phi.vercel.app",
       "featured": true
     }
   ]

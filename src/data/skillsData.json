@@ -84,12 +84,10 @@
       "name": "Git",
       "icon": "/icons/Git.svg"
     },
-
     {
-      "name": "Docker",
-      "icon": "/icons/Docker.svg"
+      "name": "AWS",
+      "icon": "/icons/AWS.svg"
     },
-
     {
       "name": "CI/CD",
       "icon": "/icons/CI-CD.svg"
@@ -97,6 +95,11 @@
     {
       "name": "Google Cloud",
       "icon": "/icons/Google Cloud.svg"
+    },
+
+    {
+      "name": "Docker",
+      "icon": "/icons/Docker.svg"
     }
   ]
 }

@@ -1,8 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import { Title } from './Title';
 import { Card, CardContent, CardHeader } from './ui/card';
 import Image from 'next/image';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import projectsData from '../data/projectsData.json';
 import { GithubIcon, ExternalLink } from 'lucide-react';
 import {
@@ -12,6 +12,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from './ui/carousel';
+import ProjectModal from './ProjectModal';
 
 const container = {
   hidden: { opacity: 0 },
@@ -29,43 +30,63 @@ const item = {
 };
 
 const Projects = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: false, margin: '-100px' });
+  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openProjectModal = (project: any) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
+  const closeProjectModal = () => {
+    setIsModalOpen(false);
+    setSelectedProject(null);
+  };
 
   return (
-    <div ref={ref} className="body-font w-full">
+    <div className="body-font w-full">
       <Title title="Featured Projects" />
       <motion.div
-        className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
+        className="mt-8 flex flex-wrap gap-8 justify-center"
         variants={container}
         initial="hidden"
-        animate={isInView ? 'show' : 'hidden'}
+        whileInView="show"
+        viewport={{ once: false, margin: '-100px' }}
       >
         {projectsData.projects.map(project => (
           <motion.div key={project.id} variants={item} className="group">
-            <Card className="h-full transition-all duration-300 group-hover:scale-105 dark:bg-neutral-700">
+            <Card 
+              className="h-full max-w-96 transition-all duration-300 group-hover:scale-105 dark:bg-neutral-900 "
+              onClick={() => openProjectModal(project)}
+            >
               <CardHeader className="relative">
-                <div className="relative h-64 w-full overflow-hidden rounded-t-lg">
+                <div 
+                  className="relative h-48 w-full overflow-hidden rounded-t-lg"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <Carousel className="w-full">
                     <CarouselContent>
-                      {project.images.map((image, index) => (
-                        <CarouselItem key={index}>
-                          <div className="relative h-48 w-full">
-                            <Image
-                              src={image}
-                              alt={`${project.title} - Image ${index + 1}`}
-                              fill
-                              className="object-cover transition-transform duration-300 group-hover:scale-110"
-                            />
-                          </div>
-                        </CarouselItem>
-                      ))}
+                      {project.images.map((image, index) => {
+                        const imageSrc = typeof image === 'string' ? image : image.src;
+                        return (
+                          <CarouselItem key={index}>
+                            <div className="relative h-48 w-full">
+                              <Image
+                                src={imageSrc}
+                                alt={`${project.title} - Image ${index + 1}`}
+                                fill
+                                className="object-contain transition-transform duration-300 group-hover:scale-110"
+                              />
+                            </div>
+                          </CarouselItem>
+                        );
+                      })}
                     </CarouselContent>
                     <CarouselPrevious className="left-2" />
                     <CarouselNext className="right-2" />
                   </Carousel>
                 </div>
-                <div className="mt-4 flex items-center justify-between">
+                <div className="mt-12 flex items-center justify-between cursor-pointer">
                   <h3 className="text-xl font-semibold dark:text-white">{project.title}</h3>
                   <div className="flex gap-4">
                     {project.github && (
@@ -74,6 +95,7 @@ const Projects = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                        onClick={(e) => e.stopPropagation()}
                       >
                         <GithubIcon size={20} />
                       </a>
@@ -84,6 +106,7 @@ const Projects = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                        onClick={(e) => e.stopPropagation()}
                       >
                         <ExternalLink size={20} />
                       </a>
@@ -92,12 +115,12 @@ const Projects = () => {
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="mb-4 text-gray-600 dark:text-gray-300">{project.description}</p>
+                <p className="mb-4 text-gray-600 text-sm dark:text-gray-300">{project.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech, index) => (
                     <span
                       key={index}
-                      className="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700 dark:bg-neutral-600 dark:text-gray-300"
+                      className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-700 dark:bg-neutral-800 dark:text-gray-300"
                     >
                       {tech}
                     </span>
@@ -108,6 +131,13 @@ const Projects = () => {
           </motion.div>
         ))}
       </motion.div>
+
+      {/* Project Modal */}
+      <ProjectModal 
+        project={selectedProject}
+        isOpen={isModalOpen}
+        onClose={closeProjectModal}
+      />
     </div>
   );
 };

@@ -22,26 +22,26 @@ const Contact = () => {
                   {/* Contact Info */}
         <div className="max-w-2xl mx-auto mb-12">
           <div className="flex flex-col items-center gap-6">
-            <div className="flex flex-row gap-6">
-            <div className="flex items-center gap-2">
-              <Mail className="w-5 h-5 text-primary" />
-              <a
-                href="mailto:yaredt29@gmail.com"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                yaredt29@gmail.com
-              </a>
-            </div>
-            <p className="text-muted-foreground">|</p>
-            <div className="flex items-center gap-2">
-              <Phone className="w-5 h-5 text-primary" />
-              <a
-                href="tel:+251934215094"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                +251 934 215 094
-              </a>
-            </div>
+            <div className="flex flex-col sm:flex-row gap-6">
+              <div className="flex items-center gap-2">
+                <Mail className="w-5 h-5 text-primary" />
+                <a
+                  href="mailto:yaredt29@gmail.com"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  yaredt29@gmail.com
+                </a>
+              </div>
+              <p className="hidden sm:block text-muted-foreground">|</p>
+              <div className="flex items-center gap-2">
+                <Phone className="w-5 h-5 text-primary" />
+                <a
+                  href="tel:+251934215094"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  +251 934 215 094
+                </a>
+              </div>
             </div>
             <div className="flex items-center gap-2">
               <MapPin className="w-5 h-5 text-primary" />
@@ -68,16 +68,16 @@ const Contact = () => {
               </Link>
             </Button>
             <Button onClick={() => window.location.href = 'mailto:yaredt29@gmail.com'} size="lg" variant="outline" className="text-lg px-8 py-6">
-              Get in Touch
+              Email Me
             </Button>
           </div>
         </div>
 
         {/* Social Links */}
         <div className="max-w-xl mx-auto">
-          <div className="flex sm:flex-row flex-col justify-center items-center gap-6">
+          <div className="flex sm:flex-row flex-wrap justify-center items-center gap-6">
             <div className="flex items-center gap-2">
-              <GitHubLogoIcon className="w-5 h-5 text-primary" />
+              <GitHubLogoIcon className="w-5 h-5 text-black dark:text-white" />
               <a
                 href="https://github.com/Yared04"
                 target="_blank"
@@ -88,7 +88,7 @@ const Contact = () => {
               </a>
             </div>
             <div className="flex items-center gap-2">
-              <LinkedInLogoIcon className="w-5 h-5 text-primary" />
+              <Image src="/icons/linkedin.svg" alt="LinkedIn" width={20} height={20} />
               <a
                 href="https://linkedin.com/in/yared04"
                 target="_blank"
@@ -99,16 +99,14 @@ const Contact = () => {
               </a>
             </div>
             <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-primary" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 3c-3.866 0-7 3.134-7 7s3.134 7 7 7 7-3.134 7-7-3.134-7-7-7zm0 2c2.761 0 5 2.239 5 5s-2.239 5-5 5-5-2.239-5-5 2.239-5 5-5z" />
-              </svg>
+              <Image src="/icons/telegram.svg" alt="Telegram" width={20} height={20} />
               <a
-                href="https://www.upwork.com/freelancers/yaredt8"
+                href="https://t.me/ya_red04"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-lg text-muted-foreground hover:text-primary transition-colors"
               >
-                Upwork
+                Telegram
               </a>
             </div>
           </div>

@@ -29,43 +29,56 @@ const initThree = (container: HTMLDivElement) => {
 
   container.appendChild(renderer.domElement);
 
-  // Camera setup
-  camera.position.set(0.2, 0.5, 1);
+  // Camera setup - focused on solo avatar
+  camera.position.set(2, 1.5, 2);
 
   controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
   controls.enablePan = false;
   controls.minDistance = 3;
-  controls.maxPolarAngle = 1.45;
-  controls.minPolarAngle = 1.45;
-  controls.target = new THREE.Vector3(0, 0.75, 0);
-  controls.enableZoom = false;
+  controls.maxDistance = 6;
+  controls.maxPolarAngle = 1.5;
+  controls.minPolarAngle = 0.5;
+  controls.target = new THREE.Vector3(0, 0.8, 0);
+  controls.enableZoom = true;
   controls.update();
 
   // Lighting
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
   scene.add(ambientLight);
 
-  const spotLight = new THREE.SpotLight(0xffffff, 20, 8, 1);
+  const spotLight = new THREE.SpotLight(0xffffff, 15, 8, 1);
   spotLight.penumbra = 0.5;
   spotLight.position.set(0, 4, 2);
   spotLight.castShadow = true;
+  spotLight.shadow.mapSize.width = 1024;
+  spotLight.shadow.mapSize.height = 1024;
   scene.add(spotLight);
 
-  const keyLight = new THREE.DirectionalLight(0xffffff, 2);
-  keyLight.position.set(1, 1, 2);
-  keyLight.lookAt(new THREE.Vector3());
+  const keyLight = new THREE.DirectionalLight(0xffffff, 1.5);
+  keyLight.position.set(2, 3, 1);
+  keyLight.castShadow = true;
+  keyLight.shadow.mapSize.width = 1024;
+  keyLight.shadow.mapSize.height = 1024;
+  keyLight.lookAt(new THREE.Vector3(0, 0.5, 0));
   scene.add(keyLight);
 
-  //create pedestal
-  const pedestal = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.8, 0.8, 0.1, 64),
-    new THREE.MeshStandardMaterial()
+  // Create standing circle/stool
+  const standingCircle = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.7, 0.8, 0.1, 64),
+    new THREE.MeshStandardMaterial({ color: 0xFFFFFF })
   );
-  pedestal.castShadow = false;
-  pedestal.receiveShadow = true;
-  pedestal.position.y = -0.05;
-  scene.add(pedestal);
+  standingCircle.castShadow = false;
+  standingCircle.receiveShadow = true;
+  standingCircle.position.y = -0.05;
+  scene.add(standingCircle);
+
+
+
+
+
+
+
 };
 
 const cleanup = () => {
@@ -108,6 +121,12 @@ export default function Avatar() {
 
         const avatar = gltf.scene;
         avatar.name = 'avatar';
+        
+        // Position and scale avatar
+        avatar.scale.set(1.05, 1.05, 1.05); // 20% bigger
+        avatar.position.set(0, 0, 0); // Center position
+        avatar.rotation.y = Math.PI / 4; // Rotate 45 degrees to face camera
+        
         avatar.traverse(child => {
           if (child instanceof THREE.Mesh) {
             child.castShadow = true;
@@ -117,27 +136,68 @@ export default function Avatar() {
 
         scene.add(avatar);
 
-        //Load Animations
+        // Load Animations
         const mixer = new THREE.AnimationMixer(avatar);
         const clips = gltf.animations;
+        
+        const stoodUpClip = THREE.AnimationClip.findByName(clips, 'stood up');
         const sittingClip = THREE.AnimationClip.findByName(clips, 'sitting');
-        const standingUpClip = THREE.AnimationClip.findByName(clips, 'stand');
-        const standingClip = THREE.AnimationClip.findByName(clips, 'standing');
-        const boredClip = THREE.AnimationClip.findByName(clips, 'bored');
-        const standingAction = standingClip ? mixer.clipAction(standingClip) : null;
+        const standingUpClip = THREE.AnimationClip.findByName(clips, 'stading up');
+        
+        const stoodUpAction = stoodUpClip ? mixer.clipAction(stoodUpClip) : null;
         const sittingAction = sittingClip ? mixer.clipAction(sittingClip) : null;
         const standingUpAction = standingUpClip ? mixer.clipAction(standingUpClip) : null;
-        const boredAction = boredClip ? mixer.clipAction(boredClip) : null;
 
-        // Add click handler
+        // Animation state management
+        let currentState = 'stood-up'; // 'stood-up', 'sitting', 'standing-up'
+        let animationTimeout: NodeJS.Timeout | null = null;
+
+        // Animation cycle functions
+        const goToSitting = () => {
+          if (currentState !== 'stood-up' || !sittingAction || !stoodUpAction) return;
+          currentState = 'sitting';
+          sittingAction.reset().play();
+          stoodUpAction.crossFadeTo(sittingAction, 0.5);
+        };
+
+        const goToStandingUp = () => {
+          if (!standingUpAction) return;
+          
+          const previousState = currentState;
+          currentState = 'standing-up';
+          standingUpAction.reset().play();
+          
+          if (previousState === 'sitting' && sittingAction) {
+            sittingAction.crossFadeTo(standingUpAction, 0.5);
+          } else if (stoodUpAction) {
+            stoodUpAction.crossFadeTo(standingUpAction, 0.5);
+          }
+          
+          // After 2 seconds of standing up, go to stood up
+          animationTimeout = setTimeout(() => {
+            goToStoodUp();
+          }, 2000);
+        };
+
+        const goToStoodUp = () => {
+          if (!stoodUpAction || !standingUpAction) return;
+          
+          currentState = 'stood-up';
+          stoodUpAction.reset().play();
+          standingUpAction.crossFadeTo(stoodUpAction, 0.5);
+          
+          // After 6 seconds of stood up, go to sitting
+          animationTimeout = setTimeout(() => {
+            goToSitting();
+          }, 6000);
+        };
+
+        // Click handler
         const raycaster = new THREE.Raycaster();
         const mouse = new THREE.Vector2();
-        let isStanding = false;
-        let isBored = false;
-        let standingTimeout: NodeJS.Timeout | null = null;
 
         const onMouseClick = (event: MouseEvent) => {
-          if (!renderer || !camera || isBored) return;
+          if (!renderer || !camera) return;
 
           // Calculate mouse position in normalized device coordinates
           const rect = renderer.domElement.getBoundingClientRect();
@@ -150,40 +210,14 @@ export default function Avatar() {
           // Calculate objects intersecting the picking ray
           const intersects = raycaster.intersectObject(avatar, true);
 
-          if (intersects.length > 0) {
-            if (isStanding) {
-              isBored = true;
-              // If already standing, play bored animation
-              boredAction?.reset().play();
-              // After bored animation, return to standing
-              setTimeout(() => {
-                boredAction?.crossFadeTo(standingAction!, 0.9);
-                isBored = false;
-              }, 9000);
-            } else {
-              // Stand up
-              isStanding = true;
-              standingUpAction?.reset().play();
-              sittingAction?.crossFadeTo(standingUpAction!, 1);
-
-              // Clear any existing timeout
-              if (standingTimeout) {
-                clearTimeout(standingTimeout);
-              }
-
-              // After standing up animation completes, switch to standing pose
-              setTimeout(() => {
-                standingAction?.reset().play();
-                standingUpAction?.crossFadeTo(standingAction!, 0.5);
-              }, 1000); // Adjust based on standing up animation length
-
-              // Set timeout to sit back down after 1 minute
-              standingTimeout = setTimeout(() => {
-                sittingAction?.reset().play();
-                standingAction?.crossFadeTo(sittingAction!, 1);
-                isStanding = false;
-              }, 60000); // 1 minute
+          if (intersects.length > 0 && currentState === 'sitting') {
+            // Clear any existing timeout
+            if (animationTimeout) {
+              clearTimeout(animationTimeout);
             }
+            
+            // Go to standing up animation
+            goToStandingUp();
           }
         };
 
@@ -202,15 +236,24 @@ export default function Avatar() {
 
         setIsLoading(false);
         animate();
-        sittingAction?.play();
+        
+        // Start with stood up animation if available
+        if (stoodUpAction) {
+          stoodUpAction.play();
+          
+          // Start the automatic cycle after 6 seconds
+          animationTimeout = setTimeout(() => {
+            goToSitting();
+          }, 6000);
+        }
 
         // Cleanup click handler and timeout
         return () => {
           if (renderer) {
             renderer.domElement.removeEventListener('click', onMouseClick);
           }
-          if (standingTimeout) {
-            clearTimeout(standingTimeout);
+          if (animationTimeout) {
+            clearTimeout(animationTimeout);
           }
         };
       },

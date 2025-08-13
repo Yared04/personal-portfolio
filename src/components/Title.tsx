@@ -12,7 +12,7 @@ export const Title = ({ title }: TitleProps) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className="mb-12 flex flex-col items-center"
+      className="mb-12 flex flex-col items-center text-center"
     >
       <h1 className="bg-gradient-to-r from-blue-500 via-purple-500 to-purple-600 bg-clip-text text-4xl font-bold text-transparent dark:from-blue-400 dark:via-purple-400 dark:to-purple-500">
         {title}
