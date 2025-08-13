@@ -23,7 +23,7 @@ const initThree = (container: HTMLDivElement) => {
 
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.setSize(650, 650);
-  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setPixelRatio(typeof window !== 'undefined' ? window.devicePixelRatio : 1);
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 

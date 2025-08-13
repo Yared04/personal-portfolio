@@ -5,22 +5,7 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, ExternalLink, Github } from 'lucide-react';
 import { Button } from './ui/button';
-
-interface ProjectImage {
-  src: string;
-  caption: string;
-}
-
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  images: string[] | ProjectImage[];
-  technologies: string[];
-  github?: string;
-  live?: string;
-  featured: boolean;
-}
+import type { Project } from '@/types/project';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -87,9 +72,6 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose })
     if (!project || !project.images[currentImageIndex]) return null;
     
     const image = project.images[currentImageIndex];
-    if (typeof image === 'string') {
-      return { src: image, caption: `${project.title} - Image ${currentImageIndex + 1}` };
-    }
     return image;
   };
 

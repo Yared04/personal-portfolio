@@ -23,7 +23,7 @@ export default function Home() {
     let scrollTimeout: NodeJS.Timeout;
     
     const handleScroll = () => {
-      if (window.innerWidth < 640) {
+      if (typeof window !== 'undefined' && window.innerWidth < 640) {
         // Clear any existing timeout
         clearTimeout(scrollTimeout);
         // Show navigation immediately when scrolling
@@ -35,9 +35,14 @@ export default function Home() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', handleScroll);
+    }
+    
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('scroll', handleScroll);
+      }
       clearTimeout(scrollTimeout);
     };
   }, []);
@@ -92,7 +97,9 @@ type SectionProps = {
 
 function Section({ name, onInViewChange, children, id }: SectionProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { amount: window.innerWidth < 800 && name === 'Projects' ? 0.1 : 0.6 });
+  const isInView = useInView(ref, { 
+    amount: typeof window !== 'undefined' && window.innerWidth < 800 && name === 'Projects' ? 0.1 : 0.6 
+  });
 
   useEffect(() => {
     if (isInView) {

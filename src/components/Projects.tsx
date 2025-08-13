@@ -13,6 +13,7 @@ import {
   CarouselPrevious,
 } from './ui/carousel';
 import ProjectModal from './ProjectModal';
+import type { Project } from '@/types/project';
 
 const container = {
   hidden: { opacity: 0 },
@@ -30,10 +31,10 @@ const item = {
 };
 
 const Projects = () => {
-  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openProjectModal = (project: any) => {
+  const openProjectModal = (project: Project) => {
     setSelectedProject(project);
     setIsModalOpen(true);
   };

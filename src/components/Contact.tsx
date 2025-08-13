@@ -1,9 +1,10 @@
+'use client';
 import React from 'react';
 import Image from 'next/image';
 import { Title } from './Title';
 import { Button } from './ui/button';
 import { Mail, Phone, MapPin } from 'lucide-react';
-import { GitHubLogoIcon, LinkedInLogoIcon } from '@radix-ui/react-icons';
+import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import Link from 'next/link';
 
 const Contact = () => {
