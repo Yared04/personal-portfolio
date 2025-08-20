@@ -14,10 +14,6 @@ const geistMono = localFont({
   weight: '100 900',
 });
 
-export const metadata: Metadata = {
-  title: 'Yared Tegegn - Software Engineer',
-  description: "Hello, I'm Yared Tegegn, a software engineer.",
-};
 
 export default function RootLayout({
   children,
@@ -28,6 +24,21 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" />
+        <meta
+          property="og:title"
+          content="Yared Tegegn - Software Engineer"
+          key="title"
+        />
+        <meta
+          property="og:description"
+          content="Hello, I'm Yared Tegegn, a software engineer."
+          key="description"
+        />
+        <meta
+          property="og:image"
+          content="/yared.png"
+          key="image"
+        />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider
