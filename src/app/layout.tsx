@@ -38,6 +38,7 @@ export default function RootLayout({
           content="/yared.png"
           key="image"
         />
+        <meta name="google-site-verification" content="lb0QUVW43kkX_cxdRZaMfTGmI_l_auR04HM04o3t1gI" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider
