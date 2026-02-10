@@ -65,12 +65,14 @@ const initThree = (container: HTMLDivElement) => {
 
   // Create standing circle/stool
   const standingCircle = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.7, 0.8, 0.1, 64),
+    new THREE.CylinderGeometry(0.9, 0.9, 0.1, 64),
     new THREE.MeshStandardMaterial({ color: 0xFFFFFF })
   );
   standingCircle.castShadow = false;
   standingCircle.receiveShadow = true;
   standingCircle.position.y = -0.05;
+  standingCircle.position.z = -0.05;
+  standingCircle.position.x = -0.22;
   scene.add(standingCircle);
 
 
@@ -121,12 +123,12 @@ export default function Avatar() {
 
         const avatar = gltf.scene;
         avatar.name = 'avatar';
-        
+
         // Position and scale avatar
-        avatar.scale.set(1.05, 1.05, 1.05); // 20% bigger
-        avatar.position.set(0, 0, 0); // Center position
+        avatar.scale.set(1.1, 1.1, 1.1); // 20% bigger
+        avatar.position.set(-0.3, 0, -0.2); // Center position
         avatar.rotation.y = Math.PI / 4; // Rotate 45 degrees to face camera
-        
+
         avatar.traverse(child => {
           if (child instanceof THREE.Mesh) {
             child.castShadow = true;
@@ -139,11 +141,11 @@ export default function Avatar() {
         // Load Animations
         const mixer = new THREE.AnimationMixer(avatar);
         const clips = gltf.animations;
-        
+
         const stoodUpClip = THREE.AnimationClip.findByName(clips, 'stood up');
         const sittingClip = THREE.AnimationClip.findByName(clips, 'sitting');
         const standingUpClip = THREE.AnimationClip.findByName(clips, 'stading up');
-        
+
         const stoodUpAction = stoodUpClip ? mixer.clipAction(stoodUpClip) : null;
         const sittingAction = sittingClip ? mixer.clipAction(sittingClip) : null;
         const standingUpAction = standingUpClip ? mixer.clipAction(standingUpClip) : null;
@@ -162,30 +164,30 @@ export default function Avatar() {
 
         const goToStandingUp = () => {
           if (!standingUpAction) return;
-          
+
           const previousState = currentState;
           currentState = 'standing-up';
           standingUpAction.reset().play();
-          
+
           if (previousState === 'sitting' && sittingAction) {
             sittingAction.crossFadeTo(standingUpAction, 0.5);
           } else if (stoodUpAction) {
             stoodUpAction.crossFadeTo(standingUpAction, 0.5);
           }
-          
+
           // After 2 seconds of standing up, go to stood up
           animationTimeout = setTimeout(() => {
             goToStoodUp();
-          }, 2000);
+          }, 2500);
         };
 
         const goToStoodUp = () => {
           if (!stoodUpAction || !standingUpAction) return;
-          
+
           currentState = 'stood-up';
           stoodUpAction.reset().play();
           standingUpAction.crossFadeTo(stoodUpAction, 0.5);
-          
+
           // After 6 seconds of stood up, go to sitting
           animationTimeout = setTimeout(() => {
             goToSitting();
@@ -215,7 +217,7 @@ export default function Avatar() {
             if (animationTimeout) {
               clearTimeout(animationTimeout);
             }
-            
+
             // Go to standing up animation
             goToStandingUp();
           }
@@ -236,11 +238,11 @@ export default function Avatar() {
 
         setIsLoading(false);
         animate();
-        
+
         // Start with stood up animation if available
         if (stoodUpAction) {
           stoodUpAction.play();
-          
+
           // Start the automatic cycle after 6 seconds
           animationTimeout = setTimeout(() => {
             goToSitting();

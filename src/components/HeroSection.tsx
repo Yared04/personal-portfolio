@@ -19,11 +19,13 @@ const HeroSection = () => {
           transition={{ duration: 0.8 }}
           className="basis-1/2 text-center lg:text-left"
         >
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="bg-gradient-to-r from-blue-500 via-purple-500 to-purple-600 bg-clip-text text-4xl font-bold text-transparent leading-tight py-2 lg:text-5xl dark:from-blue-400 dark:via-purple-400 dark:to-purple-500"
+            className="bg-gradient-to-r from-cyan-500 via-blue-500 to-sky-600 bg-clip-text text-4xl font-bold text-transparent leading-tight py-2 lg:text-5xl dark:from-cyan-400 dark:via-blue-400 dark:to-sky-500"
+
+
           >
             Yared Tegegn
           </motion.h1>
@@ -49,16 +51,18 @@ const HeroSection = () => {
               needs.
             </p>
           </motion.div>
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
             className="mt-8"
           >
-            <Button 
-              onClick={() => scrollToSection('contact')} 
+            <Button
+              onClick={() => scrollToSection('contact')}
               size="lg"
-              className="bg-gradient-to-r text-base from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium px-8"
+              className="bg-gradient-to-r text-base from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-medium px-8"
+
+
             >
               Get in Touch
             </Button>
@@ -67,26 +71,36 @@ const HeroSection = () => {
 
         <motion.div
           initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
+          animate={{ opacity: 1, x: 0, y: [0, -20, 0] }}
+          transition={{
+            opacity: { duration: 0.8 },
+            x: { duration: 0.8 },
+            y: {
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }
+          }}
           className="hidden lg:flex basis-1/2 items-center justify-center relative"
         >
-          <motion.div 
-            animate={{ 
-              background: [
-                "radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.1) 50%, rgba(147, 51, 234, 0.15) 100%)",
-                "radial-gradient(circle, rgba(147, 51, 234, 0.15) 0%, rgba(59, 130, 246, 0.1) 50%, rgba(59, 130, 246, 0.1) 100%)",
-                "radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.1) 50%, rgba(147, 51, 234, 0.15) 100%)"
-              ]
+
+          <motion.div
+            animate={{
+              // background: [
+              //   "radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(6, 182, 212, 0.15) 100%)",
+              //   "radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, rgba(59, 130, 246, 0.1) 50%, rgba(59, 130, 246, 0.1) 100%)",
+              //   "radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(6, 182, 212, 0.15) 100%)"
+
+              // ]
             }}
-            transition={{ 
-              duration: 8, 
-              repeat: Infinity, 
-              ease: "easeInOut" 
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
             }}
-            className="absolute inset-0 rounded-full"
+            className="absolute inset-0"
           />
-          <div className="relative z-10 rounded-full overflow-hidden">
+          <div className="relative z-10 overflow-hidden">
             <Avatar />
           </div>
         </motion.div>
