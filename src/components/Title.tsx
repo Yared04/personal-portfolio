@@ -1,25 +1,33 @@
+'use client';
+
 import React from 'react';
 import { motion } from 'framer-motion';
 
 type TitleProps = {
   title: string;
+  subtitle?: string;
 };
 
-export const Title = ({ title }: TitleProps) => {
+export const Title = ({ title, subtitle }: TitleProps) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      className="mb-12 flex flex-col items-center text-center"
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+      className="mb-6 sm:mb-10 flex flex-col space-y-1.5 text-left"
     >
-      <h1 className="bg-gradient-to-r from-cyan-500 via-blue-500 to-sky-600 bg-clip-text text-4xl font-bold text-transparent dark:from-cyan-400 dark:via-blue-400 dark:to-sky-500">
-        {title}
-      </h1>
-      <div className="mt-4 h-1 w-24 rounded-full bg-gradient-to-r from-cyan-500/50 via-blue-500/50 to-sky-600/50 dark:from-cyan-400/50 dark:via-blue-400/50 dark:to-sky-500/50" />
-
-
+      {subtitle && (
+        <span className="font-mono text-[10px] tracking-widest text-neutral-500 uppercase font-semibold">
+          {subtitle}
+        </span>
+      )}
+      <div className="flex items-center space-x-4">
+        <h2 className="font-bricolage text-3xl sm:text-4xl font-black tracking-tight text-white uppercase">
+          {title}
+        </h2>
+        <div className="h-[1px] flex-grow bg-white/[0.06]" />
+      </div>
     </motion.div>
   );
 };

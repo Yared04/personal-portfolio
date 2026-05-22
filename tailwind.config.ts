@@ -57,8 +57,11 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
-        body: ['var(--font-body)', 'sans-serif'],
-        heading: ['var(--font-heading)', 'sans-serif'],
+        sans: ['var(--font-sans)', 'sans-serif'],
+        mono: ['var(--font-mono)', 'monospace'],
+        bricolage: ['var(--font-bricolage)', 'sans-serif'],
+        body: ['var(--font-sans)', 'sans-serif'],
+        heading: ['var(--font-bricolage)', 'sans-serif'],
       },
     },
   },

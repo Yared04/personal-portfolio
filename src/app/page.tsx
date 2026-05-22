@@ -1,115 +1,118 @@
 'use client';
+
 import Contact from '@/components/Contact';
 import HeroSection from '@/components/HeroSection';
 import Navigation from '@/components/Navigation';
-import ParticlesBackground from '@/components/ParticlesBackground';
 import Projects from '@/components/Projects';
 import Resume from '@/components/Resume';
 import Services from '@/components/Services';
-import { ThemeToggler } from '@/components/ThemeToggler';
-import { useInView } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+
+const SECTIONS = [
+  { id: 'home', name: 'Home' },
+  { id: 'resume', name: 'Resume' },
+  { id: 'services', name: 'Services' },
+  { id: 'projects', name: 'Projects' },
+  { id: 'contact', name: 'Contact' },
+];
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState<string>('Home');
-  const [showMobileNav, setShowMobileNav] = useState(true);
 
-  const handleInViewChange = (name: string) => {
-    setActiveSection(name);
-  };
-
-  // Show navigation while scrolling, hide 1 second after stopping
   useEffect(() => {
-    let scrollTimeout: NodeJS.Timeout;
-    
     const handleScroll = () => {
-      if (typeof window !== 'undefined' && window.innerWidth < 640) {
-        // Clear any existing timeout
-        clearTimeout(scrollTimeout);
-        // Show navigation immediately when scrolling
-        setShowMobileNav(true);
-        // Hide navigation 1 second after scrolling stops
-        scrollTimeout = setTimeout(() => {
-          setShowMobileNav(false);
-        }, 1000);
+      // 1. If we are near the very top of the page, always highlight 'Home'
+      if (window.scrollY < 100) {
+        setActiveSection('Home');
+        return;
       }
+
+      // 2. If we are scrolled all the way to the bottom, always highlight 'Contact'
+      const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50;
+      if (isAtBottom) {
+        setActiveSection('Contact');
+        return;
+      }
+
+      // 3. Otherwise, determine which section is currently in the active viewport zone.
+      // We check which section starts above or at the threshold (e.g. 100px from viewport top).
+      // The last section that meets this criteria is the active one.
+      const threshold = 120;
+      let currentSection = 'Home';
+
+      for (let i = 0; i < SECTIONS.length; i++) {
+        const el = document.getElementById(SECTIONS[i].id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= threshold) {
+            currentSection = SECTIONS[i].name;
+          }
+        }
+      }
+
+      setActiveSection(currentSection);
     };
 
-    if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', handleScroll);
-    }
-    
-    return () => {
-      if (typeof window !== 'undefined') {
-        window.removeEventListener('scroll', handleScroll);
-      }
-      clearTimeout(scrollTimeout);
-    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Run once on mount to set correct initial active section
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  
+
   return (
-    <div className="">
-      {/* Particles Background */}
-      <ParticlesBackground />
+    <div className="relative min-h-screen bg-[#030303] text-foreground font-sans overflow-x-hidden">
       
-      <div className="absolute right-5 top-5 z-10">
-        <ThemeToggler />
-      </div>
+      {/* Decorative Grid Grid & Glowing Orbs Background */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.015),transparent_50%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.003)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.003)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
       
-      {/* Desktop Navigation - Fixed left sidebar */}
-      <nav className="fixed left-0 hidden h-full flex-col justify-center p-4 sm:flex">
-        <Navigation active={activeSection} />
-      </nav>
+      {/* Top capsule navigation */}
+      <Navigation active={activeSection} />
 
-      {/* Mobile Navigation - Overlay on top */}
-      <nav className={`fixed left-0 top-0 z-50 flex h-full w-full flex-col p-4 justify-center transition-opacity duration-300 sm:hidden ${showMobileNav ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-        <Navigation active={activeSection} />
-      </nav>
-
-      {/* Main content with responsive margins */}
-      <main className="container flex max-w-screen-xl flex-col gap-32 px-4 sm:ml-24 lg:ml-36">
-        <Section id="home" name="Home" onInViewChange={handleInViewChange}>
+      {/* Main content centered layout */}
+      <main className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-10 sm:pb-16 flex flex-col gap-6 sm:gap-10 lg:gap-14">
+        
+        <Section id="home">
           <HeroSection />
         </Section>
-        <Section id="resume" name="Resume" onInViewChange={handleInViewChange}>
+        
+        <Section id="resume">
           <Resume />
         </Section>
-        <Section id="services" name="Services" onInViewChange={handleInViewChange}>
+        
+        <Section id="services">
           <Services />
         </Section>
-        <Section id="projects" name="Projects" onInViewChange={handleInViewChange}>
+        
+        <Section id="projects">
           <Projects />
         </Section>
-        <Section id="contact" name="Contact" onInViewChange={handleInViewChange}>
+        
+        <Section id="contact">
           <Contact />
         </Section>
+
       </main>
+      
+      {/* Footer */}
+      <footer className="border-t border-white/[0.04] bg-[#050505] py-8 text-center text-xs text-neutral-500 font-mono tracking-wider">
+        <p>&copy; {new Date().getFullYear()} YARED TEGEGN.</p>
+      </footer>
     </div>
   );
 }
 
 type SectionProps = {
-  name: string;
-  onInViewChange: (name: string) => void;
   children: React.ReactNode;
   id: string;
 };
 
-function Section({ name, onInViewChange, children, id }: SectionProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { 
-    amount: typeof window !== 'undefined' && window.innerWidth < 800 && name === 'Projects' ? 0.1 : name === 'Resume' ? 0.2 : 0.6
-  });
-
-  useEffect(() => {
-    if (isInView) {
-      onInViewChange(name);
-    }
-  }, [isInView, name, onInViewChange]);
-
+function Section({ children, id }: SectionProps) {
   return (
-    <section ref={ref} id={id} className="flex w-full items-center justify-center py-10">
+    <section id={id} className="w-full py-6 sm:py-10 scroll-mt-20 sm:scroll-mt-24">
       {children}
     </section>
   );
 }
+

@@ -1,110 +1,163 @@
-import React from 'react';
-import NavItem from './NavItem';
+'use client';
+
+import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowDownToLine, Menu, X } from 'lucide-react';
 
 type Props = {
   active: string;
 };
 
 const navItems = [
-  {
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
-        />
-      </svg>
-    ),
-    name: 'Home',
-  },
-  {
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
-        />
-      </svg>
-    ),
-    name: 'Resume',
-  },
-  {
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495"
-        />
-      </svg>
-    ),
-    name: 'Services',
-  },
-  {
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-        />
-      </svg>
-    ),
-    name: 'Projects',
-  },
-  {
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
-        />
-      </svg>
-    ),
-    name: 'Contact',
-  },
+  { id: 'home', name: 'Home' },
+  { id: 'resume', name: 'Resume' },
+  { id: 'services', name: 'Services' },
+  { id: 'projects', name: 'Projects' },
+  { id: 'contact', name: 'Contact' },
 ];
 
 function Navigation({ active }: Props) {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleNavClick = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      const offset = 80; // Offset for sticky header
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = el.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+    }
+    setMobileMenuOpen(false);
+  };
+
   return (
-    <div className="flex flex-col space-y-3">
-      {navItems.map(item => (
-        <NavItem key={item.name} icon={item.icon} name={item.name} active={item.name === active} />
-      ))}
-    </div>
+    <motion.header
+      initial={{ y: -50, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+          ? 'py-3 bg-[#030303]/60 backdrop-blur-md border-b border-white/[0.06] shadow-lg shadow-black/20'
+          : 'py-5 bg-transparent'
+        }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between">
+
+          {/* Logo */}
+          <div className="flex items-center">
+            <motion.span
+              whileHover={{ scale: 1.05 }}
+              onClick={() => handleNavClick('home')}
+              className="text-lg font-bricolage font-black tracking-tight cursor-pointer text-white"
+            >
+              YARED<span className="text-yellow-400">&nbsp;T</span>
+            </motion.span>
+          </div>
+
+          {/* Desktop Capsule Navigation Links */}
+          <nav className="hidden md:flex items-center bg-neutral-900/40 border border-white/[0.06] rounded-full p-1.5 backdrop-blur-md">
+            {navItems.map((item) => {
+              const isActive = active.toLowerCase() === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => handleNavClick(item.id)}
+                  className={`relative px-4 py-1.5 text-xs font-medium tracking-wide transition-all duration-300 rounded-full ${isActive ? 'text-white' : 'text-neutral-400 hover:text-neutral-200'
+                    }`}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeTabPill"
+                      className="absolute inset-0 bg-white/[0.08] border border-white/[0.05] rounded-full"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10">{item.name}</span>
+                </button>
+              );
+            })}
+          </nav>
+
+          {/* Right Side Call to Action */}
+          <div className="hidden md:flex items-center space-x-3">
+            <a
+              href="/CV.pdf"
+              download="Yared_Tegegn_CV.pdf"
+              className="group flex items-center space-x-2 bg-white text-black hover:bg-neutral-200 transition-all duration-300 text-xs font-semibold px-4 py-2 rounded-full font-sans tracking-wide"
+            >
+              <span>Download CV</span>
+              <ArrowDownToLine size={14} className="group-hover:translate-y-0.5 transition-transform duration-200" />
+            </a>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="flex md:hidden items-center space-x-3">
+            <a
+              href="/CV.pdf"
+              download="Yared_Tegegn_CV.pdf"
+              className="p-2 bg-white text-black hover:bg-neutral-200 transition-all duration-300 rounded-full"
+              aria-label="Download CV"
+            >
+              <ArrowDownToLine size={16} />
+            </a>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 border border-white/[0.08] bg-neutral-900/50 hover:bg-neutral-900 text-neutral-300 rounded-full transition-all duration-200"
+              aria-label="Toggle mobile menu"
+            >
+              {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      {/* Mobile Drawer Navigation */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden w-full bg-[#030303] border-b border-white/[0.06] overflow-hidden mt-3"
+          >
+            <div className="px-4 pt-2 pb-6 space-y-2 flex flex-col">
+              {navItems.map((item) => {
+                const isActive = active.toLowerCase() === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => handleNavClick(item.id)}
+                    className={`w-full text-left py-3 px-4 text-sm font-medium tracking-wide rounded-lg transition-all duration-200 ${isActive
+                        ? 'bg-white/[0.05] text-white border-l-2 border-yellow-400 font-semibold pl-5'
+                        : 'text-neutral-400 hover:text-neutral-200 hover:bg-white/[0.02]'
+                      }`}
+                  >
+                    {item.name}
+                  </button>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 }
 

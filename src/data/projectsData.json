@@ -2,14 +2,57 @@
   "projects": [
     {
       "id": 0,
+      "title": "e-ፊርማ",
+      "description": "A Comprehensive Ethiopian Electronic Signature Platform Built for Reliability and Trust",
+      "images": [
+        {
+          "src": "/efirma1.png",
+          "caption": ""
+        },
+        {
+          "src": "/efirma2.png",
+          "caption": ""
+        },
+        {
+          "src": "/efirma3.png",
+          "caption": ""
+        },
+        {
+          "src": "/efirma4.png",
+          "caption": ""
+        }
+      ],
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Django REST Framework"
+      ],
+      "live": "https://e-firma.et",
+      "featured": true
+    },
+    {
+      "id": 1,
       "title": "Akil",
       "description": "A platform for individuals to find opportunities that match their skills and for organizations to connect with individuals.",
       "images": [
-        { "src": "/akil-1.png", "caption": "" },
-        { "src": "/akil-2.png", "caption": "" },
-        { "src": "/akil-3.png", "caption": "" }
+        {
+          "src": "/akil-1.png",
+          "caption": ""
+        },
+        {
+          "src": "/akil-2.png",
+          "caption": ""
+        },
+        {
+          "src": "/akil-3.png",
+          "caption": ""
+        }
       ],
-      "technologies": ["React (Next.js)", "TypeScript", "OpenAI API"],
+      "technologies": [
+        "React (Next.js)",
+        "TypeScript",
+        "OpenAI API"
+      ],
       "live": "https://akilconnect.org/en",
       "featured": true
     },
@@ -18,11 +61,25 @@
       "title": "Business Management System",
       "description": "A comprehensive web application for a company to efficiently manage and track various aspects of its operations, including purchases, sales, inventory levels, customers, transactions, and provisions.",
       "images": [
-        { "src": "/for-1.png", "caption": "" },
-        { "src": "/for-2.png", "caption": "" },
-        { "src": "/for-3.png", "caption": "" }
+        {
+          "src": "/for-1.png",
+          "caption": ""
+        },
+        {
+          "src": "/for-2.png",
+          "caption": ""
+        },
+        {
+          "src": "/for-3.png",
+          "caption": ""
+        }
       ],
-      "technologies": ["Express.js", "PostgreSQL", "React (Next.js)", "TypeScript"],
+      "technologies": [
+        "Express.js",
+        "PostgreSQL",
+        "React (Next.js)",
+        "TypeScript"
+      ],
       "github": "https://github.com/Yared04/F.O.R-Automatisation-backend",
       "featured": true
     },
@@ -31,12 +88,27 @@
       "title": "RateEat",
       "description": "A revolutionary food item rating application that allows users to provide ratings and reviews for individual food items, rather than the entire restaurants.",
       "images": [
-        { "src": "/rateeat-1.png", "caption": "" },
-        { "src": "/rateeat-2.png", "caption": "" },
-        { "src": "/rateeat-3.png", "caption": "" },
-        { "src": "/rateeat-4.png", "caption": "" }
+        {
+          "src": "/rateeat-1.png",
+          "caption": ""
+        },
+        {
+          "src": "/rateeat-2.png",
+          "caption": ""
+        },
+        {
+          "src": "/rateeat-3.png",
+          "caption": ""
+        },
+        {
+          "src": "/rateeat-4.png",
+          "caption": ""
+        }
       ],
-      "technologies": ["Vue (Nuxt.js)", "TypeScript"],
+      "technologies": [
+        "Vue (Nuxt.js)",
+        "TypeScript"
+      ],
       "featured": true
     },
     {
@@ -44,9 +116,17 @@
       "title": "Web File Manager",
       "description": "A web-based file management system that allows users to upload, organize, and share files with intuitive folder navigation and collaborative features.",
       "images": [
-        { "src": "/web-file-1.png", "caption": "" }
+        {
+          "src": "/web-file-1.png",
+          "caption": ""
+        }
       ],
-      "technologies": ["React (Next.js)", "TypeScript", "Django", "PostgreSQL"],
+      "technologies": [
+        "React (Next.js)",
+        "TypeScript",
+        "Django",
+        "PostgreSQL"
+      ],
       "github": "",
       "live": "https://yourtaskmanager.com",
       "featured": true
@@ -56,12 +136,31 @@
       "title": "Histori",
       "description": "An interactive 3D globe application that visualizes world history transformations over time, allowing users to explore political landscapes and historical events through timeline navigation.",
       "images": [
-        { "src": "/histori-1.png", "caption": "" },
-        { "src": "/histori-2.png", "caption": "" },
-        { "src": "/histori-3.png", "caption": "" },
-        { "src": "/histori-4.png", "caption": "" }
+        {
+          "src": "/histori-1.png",
+          "caption": ""
+        },
+        {
+          "src": "/histori-2.png",
+          "caption": ""
+        },
+        {
+          "src": "/histori-3.png",
+          "caption": ""
+        },
+        {
+          "src": "/histori-4.png",
+          "caption": ""
+        }
       ],
-      "technologies": ["React (Next.js)", "TypeScript", "Three.js", "Express.js", "MongoDB", "OpenAI API"],
+      "technologies": [
+        "React (Next.js)",
+        "TypeScript",
+        "Three.js",
+        "Express.js",
+        "MongoDB",
+        "OpenAI API"
+      ],
       "github": "https://github.com/Yared04/Histori",
       "live": "https://histori-phi.vercel.app",
       "featured": true

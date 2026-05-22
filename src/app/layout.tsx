@@ -1,18 +1,24 @@
-import localFont from 'next/font/local';
+import { Bricolage_Grotesque, Inter, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900',
-});
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900',
+const bricolage = Bricolage_Grotesque({
+  subsets: ['latin'],
+  variable: '--font-bricolage',
+  display: 'swap',
 });
 
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+});
 
 export default function RootLayout({
   children,
@@ -20,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <head>
         <link rel="icon" href="/favicon.ico" />
         <meta
@@ -40,7 +46,7 @@ export default function RootLayout({
         />
         <meta name="google-site-verification" content="lb0QUVW43kkX_cxdRZaMfTGmI_l_auR04HM04o3t1gI" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${inter.variable} ${spaceGrotesk.variable} ${bricolage.variable} font-sans antialiased bg-[#030303] text-foreground`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -53,3 +59,4 @@ export default function RootLayout({
     </html>
   );
 }
+
